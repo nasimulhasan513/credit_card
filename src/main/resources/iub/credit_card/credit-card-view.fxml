@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="690.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iub.credit_card.CreditCardController">
+   <children>
+      <TextField layoutX="62.0" layoutY="57.0" prefHeight="25.0" prefWidth="184.0" promptText="XXXX-XXXX-XXXX-XXXX" />
+      <Label layoutX="62.0" layoutY="34.0" text="Card No" />
+      <TextField layoutX="285.0" layoutY="56.0" prefHeight="25.0" prefWidth="184.0" promptText="Full Name" />
+      <Label layoutX="285.0" layoutY="33.0" text="Card Holder Name" />
+      <Accordion />
+   </children>
+</AnchorPane>
