@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
+import java.util.concurrent.Flow;
 
 public class CreditCardController {
 
@@ -33,6 +34,8 @@ public class CreditCardController {
     @FXML
     private ComboBox<String> gatewayName;
 
+    @FXML
+    private Label avgLimit;
 
     @FXML
     private TableView<CreditCard> creditCardsTableView;
@@ -48,16 +51,17 @@ public class CreditCardController {
     private TableColumn<CreditCard, String> gatewayNameColumn;
 
     @FXML
-    private ComboBox<String> gatewayNameFilter;
+    private ComboBox<String> filterGateway;
 
-    ArrayList<CreditCard> creditCards = new ArrayList<CreditCard>();
+    ArrayList<CreditCard> allCreditCards = new ArrayList<CreditCard>();
+
 
 
     @FXML
     void initialize() {
         cardType.getItems().addAll("silver", "gold","platinum","titanium");
         gatewayName.getItems().addAll("Visa", "Mastercard");
-        gatewayNameFilter.getItems().addAll("Visa", "Mastercard");
+        filterGateway.getItems().addAll("Visa", "Mastercard");
 
 
         cardNoColumn.setCellValueFactory(new PropertyValueFactory<CreditCard, String>("cardNo"));
@@ -73,10 +77,40 @@ public class CreditCardController {
     @FXML
     void searchAndLoadTable(ActionEvent event) {
 
+
+        creditCardsTableView.getItems().clear();
+
+
+        for (CreditCard creditCard : allCreditCards) {
+
+
+            if(creditCard.getGatewayName().equals(filterGateway.getValue().trim())  && creditCard.getCreditLimit()<=Float.parseFloat(creditLimitFilter.getText().trim())) {
+                creditCardsTableView.getItems().add(creditCard);
+
+            }
+
+        }
+
+
+
+
     }
 
     @FXML
     void showAvgCreditLimit(ActionEvent event) {
+
+
+        float totalCreditLimit = 0;
+        int itemCount = 0;
+         for(CreditCard creditCard: creditCardsTableView.getItems()){
+             totalCreditLimit += creditCard.getCreditLimit();
+             itemCount++;
+         }
+
+         float avgCreditLimit = totalCreditLimit / itemCount;
+
+        avgLimit.setText(String.format("%.2f", avgCreditLimit));
+
 
     }
 
@@ -128,13 +162,7 @@ public class CreditCardController {
                 );
 
 
-
-
-
-       System.out.println(creditCard.toString());
-
-
-       creditCards.add(creditCard);
+        allCreditCards.add(creditCard);
 
 
        creditCardsTableView.getItems().add(creditCard);
