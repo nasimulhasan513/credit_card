@@ -1,5 +1,7 @@
 package iub.credit_card;
 
+import javafx.scene.control.Alert;
+
 import java.time.LocalDate;
 
 public class CreditCard {
@@ -20,6 +22,7 @@ public class CreditCard {
         this.creditLimit = creditLimit;
         this.cardType = cardType;
     }
+
 
 
     public String getCardNo() {
@@ -86,8 +89,11 @@ public class CreditCard {
 
 
 
-    public String showCardInfoToAlert(){
-        return this.toString();
+    public void showCardInfoToAlert(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Credit Card");
+        alert.setContentText(this.toString());
+        alert.show();
     }
     
 }
